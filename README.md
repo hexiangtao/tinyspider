@@ -29,3 +29,6 @@ java -jar  spider.jar   www.baidu.com  1000  urls.md
 
 
 #### [可以直接下载jar包体验](https://github.com/enohe/smallspider/blob/master/spider.jar)
+
+运行示例图:
+![demo](https://github.com/enohe/smallspider/blob/master/20180310192521.png)
