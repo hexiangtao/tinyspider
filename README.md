@@ -2,7 +2,7 @@
 几十行代码实现 一个简短的爬虫小程序 
 
 ### 共6个文件
-```java 
+```
 DefaultDocumentListener.java
 DocumentListener.java
 LinkCollection.java
@@ -28,4 +28,4 @@ java -jar  spider.jar   www.baidu.com  1000  urls.md
 
 
 
-#### [可以直接下载jar包体验](www.baidu.com)
+#### [可以直接下载jar包体验](https://github.com/enohe/smallspider/blob/master/spider.jar)
