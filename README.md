@@ -14,12 +14,14 @@ PageCrawRunnable.java
 
 
 ##  启动方式 
-1: 只带一个参数启动 
-    java -jar  spider.jar  www.baidu.com
-    
-2:多个参数启动
+### 1: 只包含一个参数启动
+```
+    java -jar  spider.jar  www.baidu.com
+```    
+### 2:包含多个参数启动
+````
 java -jar  spider.jar   www.baidu.com  1000  D:/urls.md
-
+````
 
 ### 启动参数说明
 1. wwww.baidu.com  要爬取的网站,如上：
