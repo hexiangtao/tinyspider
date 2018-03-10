@@ -18,13 +18,13 @@ PageCrawRunnable.java
     java -jar  spider.jar  www.baidu.com
     
 2:多个参数启动
-java -jar  spider.jar   www.baidu.com  1000  urls.md
+java -jar  spider.jar   www.baidu.com  1000  D:/urls.md
 
 
 ### 启动参数说明
-1:要爬取的网站,如上：wwww.baidu.com
-2:开启的线程数(可选，默认200),如上:1000
-3:内容存放路径(默认不存储) 
+1. wwww.baidu.com  要爬取的网站,如上：
+2. 1000            开启的线程数(可选，默认200)
+3. D:/url.text     内容存放路径(默认不存储) 
 
 
 
