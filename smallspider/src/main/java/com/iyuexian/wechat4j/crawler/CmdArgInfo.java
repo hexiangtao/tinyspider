@@ -1,8 +1,14 @@
 package com.iyuexian.wechat4j.crawler;
 
-public class App {
+public class CmdArgInfo {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static CmdArgInfo getCMDArgs(String host, String savePath, int threadNum) {
+
+		return new CmdArgInfo(host, savePath, threadNum);
+
+	}
+
+	public static CmdArgInfo getCMDArgs(String[] args) {
 
 		String host = "www.baidu.com";
 		if (args == null || args.length == 0) {
@@ -17,14 +23,11 @@ public class App {
 		if (args.length > 2) {
 			savePath = args[2] != null && args[2].trim().length() > 0 ? args[2] : "";
 		}
-		DocumentListener listener = new DefaultDocumentListener(host, savePath);
-		PageCrawer pageCrawer = new PageCrawer(host, threadNum, listener);
-		Logger.info("开始抓取:{}....", host);
-		Thread.sleep(2000);
-		pageCrawer.start();
+		return new CmdArgInfo(host, savePath, threadNum);
+
 	}
 
-	public static int setThreadNum(String[] args) {
+	private static int setThreadNum(String[] args) {
 		final int defaultNum = 200;
 		final int maxNum = 3000;
 		if (args == null || args.length < 2) {
@@ -51,4 +54,30 @@ public class App {
 		}
 
 	}
+
+	private String host = "";
+	private String savePath = "";
+	private int threadNum;
+
+	private CmdArgInfo() {
+	}
+
+	private CmdArgInfo(String host, String savePath, int threadNum) {
+		this.host = host;
+		this.savePath = savePath;
+		this.threadNum = threadNum;
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public String getSavePath() {
+		return savePath;
+	}
+
+	public int getThreadNum() {
+		return threadNum;
+	}
+
 }
