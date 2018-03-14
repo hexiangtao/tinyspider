@@ -5,23 +5,32 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class LinkCollection {
+public class Links {
 	private Set<String> fetched;
 	private Queue<String> unFetched;
 
-	public LinkCollection() {
+	private static final class Holder {
+		static final Links INSTANCE = new Links();
+	}
+
+	public static Links instance() {
+
+		return Holder.INSTANCE;
+	}
+
+	private Links() {
 		this.fetched = new HashSet<String>();
 		this.unFetched = new ConcurrentLinkedQueue<String>();
 	}
 
 	public boolean isFetched(String link) {
-		synchronized (LinkCollection.class) {
+		synchronized (Links.class) {
 			return fetched.contains(link);
 		}
 	}
 
 	public void setFetched(String url) {
-		synchronized (LinkCollection.class) {
+		synchronized (Links.class) {
 			fetched.add(url);
 		}
 	}

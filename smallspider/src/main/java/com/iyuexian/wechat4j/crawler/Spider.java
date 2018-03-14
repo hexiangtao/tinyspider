@@ -7,44 +7,54 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class PageCrawer {
+public class Spider {
 
-	private LinkCollection linkCollection;
 	private int threadNum = 3;
-	private List<PageCrawRunnable> tasks;
+	private List<Downloader> tasks;
 	private ExecutorService threadPool;
+	private CmdArgInfo cmdArgInfo;
 
-	private List<DocumentListener> listeners;
+	private String host;
 
-	public PageCrawer(String host, DocumentListener... listeners) {
-		this(host, 1, listeners);
+	private List<PageProcessor> pageProcessors;
+
+	public Spider site(String host) {
+		this.host = host;
+		return this;
 	}
 
-	public PageCrawer(String host, int threadNum, DocumentListener... listener) {
+	public Spider thread(int threadNum) {
 		this.threadNum = threadNum;
-		this.linkCollection = new LinkCollection();
-		this.tasks = new ArrayList<PageCrawRunnable>(threadNum);
+		return this;
+	}
 
-		if (listener != null && listener.length > 0) {
-			this.listeners = Arrays.asList(listener);
-		} else {
-			this.listeners = Arrays.asList(new DefaultDocumentListener(host));
+	public Spider processor(PageProcessor... pageProcessors) {
+
+		if (pageProcessors == null || pageProcessors.length == 0) {
+			throw new IllegalArgumentException("pageProcessor not config");
 		}
 
+		this.tasks = new ArrayList<Downloader>(threadNum);
+		this.pageProcessors = Arrays.asList(pageProcessors);
 		String firtUrl = host.startsWith("http") ? host : host.startsWith("https:") ? host : "http://" + host;
-		linkCollection.offer(firtUrl);
+		Links.instance().offer(firtUrl);
 		this.threadPool = Executors.newScheduledThreadPool(threadNum);
 		for (int i = 0; i < threadNum; i++) {
-			tasks.add(new PageCrawRunnable(linkCollection, this.listeners));
+			tasks.add(new Downloader(this.pageProcessors));
 		}
+		return this;
 	}
 
 	public void start() {
 		try {
+			if (cmdArgInfo != null) {
+				Logger.info("线程数:{}开始抓取:{}....", cmdArgInfo.getThreadNum(), cmdArgInfo.getHost());
+			}
+			Thread.sleep(2000);
 			long timestamp = System.currentTimeMillis();
 
 			List<Future<?>> futureList = new ArrayList<Future<?>>();
-			for (PageCrawRunnable task : tasks) {
+			for (Downloader task : tasks) {
 				Future<?> future = threadPool.submit(task);
 				futureList.add(future);
 			}
@@ -52,8 +62,9 @@ public class PageCrawer {
 				future.get();
 			}
 
-			Logger.info("耗时:{}秒,抓取完毕，共{}条网页", (System.currentTimeMillis() - timestamp) / 1000, linkCollection.getFetched().size());
-			for (String item : linkCollection.getFetched()) {
+			Logger.info("耗时:{}秒,抓取完毕，共{}条网页", (System.currentTimeMillis() - timestamp) / 1000,
+					Links.instance().getFetched().size());
+			for (String item : Links.instance().getFetched()) {
 				Logger.info("{}", item);
 			}
 
@@ -68,15 +79,11 @@ public class PageCrawer {
 		threadPool.shutdown();
 	}
 
-	public LinkCollection getLinkCollection() {
-		return linkCollection;
-	}
-
 	public int getThreadNum() {
 		return threadNum;
 	}
 
-	public List<PageCrawRunnable> getTasks() {
+	public List<Downloader> getTasks() {
 		return tasks;
 	}
 
