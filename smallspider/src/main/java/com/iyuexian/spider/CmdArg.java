@@ -1,14 +1,14 @@
-package com.iyuexian.wechat4j.crawler;
+package com.iyuexian.spider;
 
-public class CmdArgInfo {
+public class CmdArg {
 
-	public static CmdArgInfo getCMDArgs(String host, String savePath, int threadNum) {
+	public static CmdArg getCmdArgs(String host, String savePath, int threadNum) {
 
-		return new CmdArgInfo(host, savePath, threadNum);
+		return new CmdArg(host, savePath, threadNum);
 
 	}
 
-	public static CmdArgInfo getCMDArgs(String[] args) {
+	public static CmdArg getCmdArgs(String[] args) {
 
 		String host = "www.baidu.com";
 		if (args == null || args.length == 0) {
@@ -23,7 +23,7 @@ public class CmdArgInfo {
 		if (args.length > 2) {
 			savePath = args[2] != null && args[2].trim().length() > 0 ? args[2] : "";
 		}
-		return new CmdArgInfo(host, savePath, threadNum);
+		return new CmdArg(host, savePath, threadNum);
 
 	}
 
@@ -59,10 +59,10 @@ public class CmdArgInfo {
 	private String savePath = "";
 	private int threadNum;
 
-	private CmdArgInfo() {
+	private CmdArg() {
 	}
 
-	private CmdArgInfo(String host, String savePath, int threadNum) {
+	private CmdArg(String host, String savePath, int threadNum) {
 		this.host = host;
 		this.savePath = savePath;
 		this.threadNum = threadNum;

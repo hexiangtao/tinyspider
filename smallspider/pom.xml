@@ -30,7 +30,7 @@
                     <configuration>
                         <transformers>
                             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>com.iyuexian.wechat4j.crawler.App</mainClass>
+                                <mainClass>com.iyuexian.spider.BaiduPageProcessor</mainClass>
                             </transformer>
                         </transformers>
                     </configuration>

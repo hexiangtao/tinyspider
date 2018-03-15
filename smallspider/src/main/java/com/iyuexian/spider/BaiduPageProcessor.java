@@ -1,4 +1,4 @@
-package com.iyuexian.wechat4j.crawler;
+package com.iyuexian.spider;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class BaiduPageProcessor implements PageProcessor {
 
 	public static void main(String[] args) {
 
-		new Spider().site("www.baidu.com").processor(new BaiduPageProcessor()).start();
+		Spider.site("www.baidu.com").processor(new BaiduPageProcessor()).start();
 
 	}
 
