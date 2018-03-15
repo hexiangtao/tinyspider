@@ -31,15 +31,15 @@ java -jar  spider.jar   www.baidu.com  1000  D:/urls.md
 
 交流群:580889921
 
-#### [直接下载jar包体验(文件大小:397kb)](https://github.com/enohe/smallspider/blob/master/smallspider/src/main/resources/assert/spider-0.0.1-SNAPSHOT-shaded.jar)
+#### [直接下载jar包体验(文件大小:397kb)](https://github.com/enohe/tinyspider/blob/master/tinyspider/src/main/resources/assert/spider-0.0.1-SNAPSHOT-shaded.jar)
 
 #### 代码示例图
-![demo](https://github.com/enohe/smallspider/blob/master/smallspider/src/main/resources/assert/code.png)
+![demo](https://github.com/enohe/tinyspider/blob/master/tinyspider/src/main/resources/assert/code.png)
 
 
 
 
 ##### 运行示例图:
-![demo](https://github.com/enohe/smallspider/blob/master/smallspider/src/main/resources/assert/console.png)
+![demo](https://github.com/enohe/tinyspider/blob/master/tinyspider/src/main/resources/assert/console.png)
 
 
