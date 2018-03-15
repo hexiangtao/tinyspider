@@ -11,8 +11,8 @@ public class LinkStorage {
 	 
 	public static void main(String[] args) {
 
-		LinkStorage.instance().offer("000");
-		LinkStorage.instance().offer("000");
+		LinkStorage.instance().offer("000"); 
+		LinkStorage.instance().offer("000s");
 		System.out.println(LinkStorage.instance().getUnFetched().size());
 
 	}
