@@ -1,8 +1,13 @@
-package com.iyuexian.spider;
+package com.iyuexian.spider.demo;
 
 import java.util.List;
 
 import org.jsoup.nodes.Document;
+
+import com.iyuexian.spider.core.LinkStorage;
+import com.iyuexian.spider.core.PageProcessor;
+import com.iyuexian.spider.core.Spider;
+import com.iyuexian.spider.util.Logger;
 
 public class BaiduPageProcessor implements PageProcessor {
 
@@ -19,7 +24,7 @@ public class BaiduPageProcessor implements PageProcessor {
 			if (!url.contains("www.baidu.com")) {
 				continue;
 			}
-			Links.instance().offer(url);
+			LinkStorage.instance().offer(url);
 		}
 	}
 

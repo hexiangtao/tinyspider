@@ -1,4 +1,6 @@
-package com.iyuexian.spider;
+package com.iyuexian.spider.util;
+
+import com.iyuexian.spider.util.Logger;
 
 public class CmdArg {
 

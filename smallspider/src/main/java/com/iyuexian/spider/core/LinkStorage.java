@@ -1,37 +1,49 @@
-package com.iyuexian.spider;
+package com.iyuexian.spider.core;
 
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class Links {
+public class LinkStorage {
 	private Set<String> fetched;
 	private Queue<String> unFetched;
 
-	private static final class Holder {
-		static final Links INSTANCE = new Links();
+	private static final int maxFetchSize = 100000;
+
+	public boolean isEnableFetch() {
+		return LinkStorage.instance().getFetched().size() < maxFetchSize;
 	}
 
-	public static Links instance() {
+	private static final class Holder {
+		static final LinkStorage INSTANCE = new LinkStorage();
+	}
+
+	public static LinkStorage instance() {
 
 		return Holder.INSTANCE;
 	}
 
-	private Links() {
+	private LinkStorage() {
 		this.fetched = new HashSet<String>();
 		this.unFetched = new ConcurrentLinkedQueue<String>();
 	}
 
 	public boolean isFetched(String link) {
-		synchronized (Links.class) {
+		synchronized (LinkStorage.class) {
 			return fetched.contains(link);
 		}
 	}
 
-	public void setFetched(String url) {
-		synchronized (Links.class) {
+	public void putFetched(String url) {
+		synchronized (LinkStorage.class) {
 			fetched.add(url);
+		}
+	}
+
+	public void removeFetched(String url) {
+		synchronized (LinkStorage.class) {
+			fetched.remove(url);
 		}
 	}
 

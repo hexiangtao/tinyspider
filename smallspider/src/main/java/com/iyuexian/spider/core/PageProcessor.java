@@ -1,4 +1,4 @@
-package com.iyuexian.spider;
+package com.iyuexian.spider.core;
 
 import java.util.List;
 
