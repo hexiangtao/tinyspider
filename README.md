@@ -40,6 +40,6 @@ java -jar  spider.jar   www.baidu.com  1000  D:/urls.md
 
 
 ##### 运行示例图:
-![demo](https://github.com/enohe/smallspider/blob/master/smallspider/src/main/resources/assert/20180315144556.png)
+![demo](https://github.com/enohe/smallspider/blob/master/smallspider/src/main/resources/assert/console.png)
 
 
