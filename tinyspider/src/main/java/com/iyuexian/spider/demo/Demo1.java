@@ -14,7 +14,7 @@ import com.iyuexian.spider.util.Logger;
 public class Demo1 extends AbstractPageProcessor {
 
 	public static void main(String[] args) {
-		Spider.create().thread(1).processor(new Demo1()).start();
+		Spider.create().thread(100).processor(new Demo1()).start();
 	}
 
 	@Override
