@@ -1,14 +1,12 @@
 # smallspider 
 几十行代码实现 一个简单的爬虫程序 
 
-### 共6个文件
+### 核心文件共4个文件
 ```
-DefaultDocumentListener.java
-DocumentListener.java
-LinkCollection.java
-Logger.java
-PageCrawer.java
-PageCrawRunnable.java
+Downloader.java
+LinkStorage.java
+PageProcessor.java
+Spider.java
 ```
 
 
