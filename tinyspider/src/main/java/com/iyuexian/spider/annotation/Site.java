@@ -12,5 +12,5 @@ import java.lang.annotation.Target;
 public @interface Site {
 	public String host();
 
-	public String[] filter();
+	public String[] filter() default {};
 }

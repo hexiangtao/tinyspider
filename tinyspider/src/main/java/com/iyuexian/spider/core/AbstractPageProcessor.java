@@ -20,8 +20,8 @@ public abstract class AbstractPageProcessor implements PageProcessor {
 				continue;
 			}
 			LinkStorage.instance().offer(url);
-			process(doc);
 		}
+		process(doc);
 
 	}
 
