@@ -8,7 +8,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class LinkStorage {
 
 	
-	
+	 
 	public static void main(String[] args) {
 
 		LinkStorage.instance().offer("000");
