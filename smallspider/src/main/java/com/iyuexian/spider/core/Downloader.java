@@ -11,6 +11,7 @@ import org.jsoup.select.Elements;
 
 import com.iyuexian.spider.util.Logger;
 
+
 public class Downloader implements Runnable {
 
 	private static final int DEFAULT_WAIT_MAX_COUNT = 10;
