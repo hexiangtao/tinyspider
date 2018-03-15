@@ -1,13 +1,9 @@
 package com.iyuexian.spider.core;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
-
-import com.iyuexian.spider.demo.City;
 
 public class LinkStorage {
 
