@@ -13,7 +13,7 @@ import com.iyuexian.spider.util.Logger;
 public class ZhihuPageProcessor extends AbstractPageProcessor {
 
 	public static void main(String[] args) {
-		Spider.site("www.zhihu.com").thread(10).processor(new ZhihuPageProcessor()).start();
+		Spider.site("www.zhihu.com").thread(100).processor(new ZhihuPageProcessor()).start();
 	}
 
 	@Override
