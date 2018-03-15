@@ -1,14 +1,14 @@
 # smallspider 
 几十行代码实现 一个简单的爬虫程序 
 
-### 共6个文件
+
+
+### 核心文件共4个文件
 ```
-DefaultDocumentListener.java
-DocumentListener.java
-LinkCollection.java
-Logger.java
-PageCrawer.java
-PageCrawRunnable.java
+Downloader.java
+LinkStorage.java
+PageProcessor.java
+Spider.java
 ```
 
 
@@ -29,8 +29,11 @@ java -jar  spider.jar   www.baidu.com  1000  D:/urls.md
 3. D:/url.text     内容存放路径(默认不存储) 
 
 
+交流群:580889921
 
 #### [直接下载jar包体验(文件大小:397kb)](https://github.com/enohe/smallspider/blob/master/spider.jar)
 
 ##### 运行示例图:
 ![demo](https://github.com/enohe/smallspider/blob/master/20180310192521.png)
+
+
