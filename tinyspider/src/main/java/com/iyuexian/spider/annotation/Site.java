@@ -9,6 +9,8 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface UrlPrefix {
-	public String[] value();
+public @interface Site {
+	public String host();
+
+	public String[] filter();
 }

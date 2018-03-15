@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import com.iyuexian.spider.annotation.Site;
 import com.iyuexian.spider.util.CmdArg;
 import com.iyuexian.spider.util.Logger;
 
@@ -44,12 +45,22 @@ public class Spider {
 	private Spider() {
 	}
 
+	public static Spider create() {
+		Spider spider = new Spider();
+		return spider;
+	}
+
 	public static Spider site(String host) {
 		Spider spider = new Spider();
-		spider.host = host;
+		spider.host(host);
+		return spider;
+	}
+
+	public Spider host(String host) {
+		this.host = host;
 		String fisrtUrl = host.startsWith("http") ? host : host.startsWith("https:") ? host : "http://" + host;
 		LinkStorage.instance().offer(fisrtUrl);
-		return spider;
+		return this;
 	}
 
 	public Spider thread(int threadNum) {
@@ -70,6 +81,18 @@ public class Spider {
 			throw new IllegalArgumentException("pageProcessor not config");
 		}
 		this.pageProcessor = pageProcessor;
+
+		if (this.host != null && this.host.trim().length() > 0) {
+			return this;
+		}
+
+		Site site = this.pageProcessor.getClass().getAnnotation(Site.class);
+		if (site == null || site.host() == null || site.host().trim().length() == 0) {
+			Logger.warn("host not config");
+		} else {
+			this.host(site.host());
+		}
+
 		return this;
 	}
 
@@ -114,14 +137,15 @@ public class Spider {
 		try {
 			threadPool.shutdown();
 
-			for (Future<?> future : results) {
-				future.get();
-			}
-			Logger.info("耗时:{}秒,抓取完毕，共{}条网页", (System.currentTimeMillis() - startTime) / 1000,
-					LinkStorage.instance().getFetched().size());
-			for (String item : LinkStorage.instance().getFetched()) {
-				Logger.info("{}", item);
-			}
+			// for (Future<?> future : results) {
+			// future.get();
+			// }
+			// Logger.info("耗时:{}秒,抓取完毕，共{}条网页", (System.currentTimeMillis() - startTime) /
+			// 1000,
+			// LinkStorage.instance().getFetched().size());
+			// for (String item : LinkStorage.instance().getFetched()) {
+			// Logger.info("{}", item);
+			// }
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

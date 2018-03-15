@@ -37,12 +37,12 @@ public class Downloader implements Runnable {
 
 	private Document download(String url) {
 		linksStorage.putFetched(url);
-		Logger.debug("download page:{}", url);
+		Logger.debug("download :{}", url);
 		try {
 			Document doc = Jsoup.connect(url).get();
 			return doc;
 		} catch (IOException e) {
-			Logger.error("download  page {} fail,cause by:{}", url, e.getMessage());
+			Logger.error("download  {} fail,cause by:{}", url, e.getMessage());
 			linksStorage.removeFetched(url);
 			return null;
 		}

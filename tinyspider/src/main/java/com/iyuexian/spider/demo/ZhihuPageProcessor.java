@@ -3,17 +3,18 @@ package com.iyuexian.spider.demo;
 import org.jsoup.nodes.Document;
 
 import com.iyuexian.spider.annotation.Selector;
-import com.iyuexian.spider.annotation.UrlPrefix;
+import com.iyuexian.spider.annotation.Site;
 import com.iyuexian.spider.core.AbstractPageProcessor;
 import com.iyuexian.spider.core.Spider;
 import com.iyuexian.spider.util.Logger;
 
-@Selector("h2.ContentItem-title")
-@UrlPrefix("www.zhihu.com")
+//@Selector("h2.ContentItem-title")
+@Selector("title")
+@Site(host = "www.baidu.com", filter = "www.baidu.com")
 public class ZhihuPageProcessor extends AbstractPageProcessor {
 
 	public static void main(String[] args) {
-		Spider.site("www.zhihu.com").thread(100).processor(new ZhihuPageProcessor()).start();
+		Spider.create().thread(100).processor(new ZhihuPageProcessor()).start();
 	}
 
 	@Override
