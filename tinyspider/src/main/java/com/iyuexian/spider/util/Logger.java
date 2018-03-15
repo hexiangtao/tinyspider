@@ -17,7 +17,7 @@ public class Logger {
 
 	}
 
-	private static final Level current = Level.INFO;
+	private static final Level current = Level.DEBUG;
 
 	public static Logger getLogger() {
 		return new Logger();

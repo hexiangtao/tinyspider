@@ -37,7 +37,7 @@ public class Downloader implements Runnable {
 
 	private Document download(String url) {
 		linksStorage.putFetched(url);
-		Logger.debug("download :{}", url);
+		Logger.debug("download:{}", url);
 		try {
 			Document doc = Jsoup.connect(url).get();
 			return doc;
@@ -57,7 +57,6 @@ public class Downloader implements Runnable {
 
 		this.currentWiatCount = 0;
 		linksStorage.putFetched(link);
-		Logger.debug("download page:{}", link);
 		Document doc = download(link);
 		invokeProcessor(link, doc);
 		return;
