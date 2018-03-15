@@ -17,7 +17,18 @@ public class Logger {
 
 	}
 
-	private static final Level current = Level.INFO;
+	private static Level current = Level.INFO;
+
+	public static void setLevel(int le) {
+
+		for (Level level : Level.values()) {
+			if (level.level == le) {
+				current = level;
+				return;
+			}
+		}
+
+	}
 
 	public static Logger getLogger() {
 		return new Logger();

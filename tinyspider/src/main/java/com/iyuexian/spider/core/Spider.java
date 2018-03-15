@@ -56,6 +56,14 @@ public class Spider {
 		return spider;
 	}
 
+	public static Spider create(CmdArg cmdArg) {
+		Spider spider = new Spider();
+		spider.host(cmdArg.getHost());
+		spider.threadNum = cmdArg.getThreadNum();
+		spider.cmdArgInfo = cmdArg;
+		return spider;
+	}
+
 	public Spider host(String host) {
 		this.host = host;
 		String fisrtUrl = host.startsWith("http") ? host : host.startsWith("https:") ? host : "http://" + host;
@@ -115,7 +123,8 @@ public class Spider {
 	private void checkInitParameters() {
 		initThreads();
 		if (cmdArgInfo != null) {
-			Logger.info("线程数:{}开始抓取:{}....", cmdArgInfo.getThreadNum(), cmdArgInfo.getHost());
+			Logger.info("线程:{},selector:{},filter:{},开始抓取:{}....", cmdArgInfo.getThreadNum(), cmdArgInfo.getSelector(),
+					cmdArgInfo.getFilterUrl(), cmdArgInfo.getHost());
 		}
 	}
 

@@ -4,12 +4,18 @@ import com.iyuexian.spider.util.Logger;
 
 public class CmdArg {
 
-	public static CmdArg getCmdArgs(String host, String savePath, int threadNum) {
-
-		return new CmdArg(host, savePath, threadNum);
+	public static CmdArg getCmdArgs(String host, int threadNum, String selector, String filterUrl) {
+		return new CmdArg(host, threadNum, selector, filterUrl);
 
 	}
 
+	/**
+	 * 
+	 * @param args
+	 *            args[0] host 域名 默认 www.baidu.com args[1] threadNum 线程数 默认 1
+	 *            args[2] selecotr 选择器 默认 空
+	 * @return
+	 */
 	public static CmdArg getCmdArgs(String[] args) {
 
 		String host = "www.baidu.com";
@@ -19,25 +25,38 @@ public class CmdArg {
 			host = args[0];
 		}
 
-		int threadNum = setThreadNum(args);
-		String savePath = "";
+		int threadNum = setThreadNum(args, 1);
+		String selector = "", filterUrl = "";
 
 		if (args.length > 2) {
-			savePath = args[2] != null && args[2].trim().length() > 0 ? args[2] : "";
+			selector = args[2] != null && args[2].trim().length() > 0 ? args[2] : "";
+		} else {
+			selector = "title";
+			Logger.warn("未设置提取标签,默认使用 {}", selector);
 		}
-		return new CmdArg(host, savePath, threadNum);
+
+		if (args.length > 3) {
+			selector = args[3] != null && args[3].trim().length() > 0 ? args[3] : "";
+		} else {
+			filterUrl = host;
+			Logger.warn("未设置匹配url,默认使用 {}", filterUrl);
+		}
+
+		setLoggerLevel(args, 4);
+
+		return new CmdArg(host, threadNum, selector, filterUrl);
 
 	}
 
-	private static int setThreadNum(String[] args) {
-		final int defaultNum = 200;
+	private static int setThreadNum(String[] args, int index) {
+		final int defaultNum = 1;
 		final int maxNum = 3000;
-		if (args == null || args.length < 2) {
+		if (args == null || args.length <= index) {
 			Logger.info("未设置线程数，使用默认值:{}", defaultNum);
 			return defaultNum;
 		}
 
-		String num = args[1];
+		String num = args[index];
 		if (num == null || num.trim().length() == 0) {
 			Logger.warn("未设置线程数，使用默认值:{}", defaultNum);
 			return defaultNum;
@@ -57,29 +76,48 @@ public class CmdArg {
 
 	}
 
+	private static void setLoggerLevel(String[] args, int index) {
+		try {
+			if (args.length <= index) {
+				return;
+			}
+			int lNum = Integer.parseInt(args[index]);
+			Logger.setLevel(lNum);
+		} catch (Exception ex) {
+			Logger.error("invalid level val of {}", args[index]);
+		}
+
+	}
+
 	private String host = "";
-	private String savePath = "";
 	private int threadNum;
+	private String selector;
+	private String filterUrl;
 
 	private CmdArg() {
 	}
 
-	private CmdArg(String host, String savePath, int threadNum) {
+	private CmdArg(String host, int threadNum, String selector, String filterUrl) {
 		this.host = host;
-		this.savePath = savePath;
 		this.threadNum = threadNum;
+		this.selector = selector;
+		this.filterUrl = filterUrl;
 	}
 
 	public String getHost() {
 		return host;
 	}
 
-	public String getSavePath() {
-		return savePath;
-	}
-
 	public int getThreadNum() {
 		return threadNum;
+	}
+
+	public String getSelector() {
+		return selector;
+	}
+
+	public String getFilterUrl() {
+		return filterUrl;
 	}
 
 }

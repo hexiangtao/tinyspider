@@ -16,7 +16,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>spider</finalName>
+		<finalName>tinyspider</finalName>
 		<plugins>
 		  <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -30,7 +30,7 @@
                     <configuration>
                         <transformers>
                             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>com.iyuexian.spider.demo.Demo1</mainClass>
+                                <mainClass>com.iyuexian.spider.App</mainClass>
                             </transformer>
                         </transformers>
                     </configuration>

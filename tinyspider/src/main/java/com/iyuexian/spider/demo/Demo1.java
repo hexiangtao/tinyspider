@@ -8,7 +8,6 @@ import com.iyuexian.spider.core.AbstractPageProcessor;
 import com.iyuexian.spider.core.Spider;
 import com.iyuexian.spider.util.Logger;
 
-//@Selector("h2.ContentItem-title")
 @Selector("title")
 @Site(host = "www.baidu.com", filter = "baidu.com")
 public class Demo1 extends AbstractPageProcessor {
