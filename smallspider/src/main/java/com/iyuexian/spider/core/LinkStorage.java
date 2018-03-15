@@ -1,11 +1,26 @@
 package com.iyuexian.spider.core;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Queue;
 import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ArrayBlockingQueue;
+
+import com.iyuexian.spider.demo.City;
 
 public class LinkStorage {
+
+	
+	
+	public static void main(String[] args) {
+
+		LinkStorage.instance().offer("000");
+		LinkStorage.instance().offer("000");
+		System.out.println(LinkStorage.instance().getUnFetched().size());
+
+	}
+
 	private Set<String> fetched;
 	private Queue<String> unFetched;
 
@@ -26,7 +41,7 @@ public class LinkStorage {
 
 	private LinkStorage() {
 		this.fetched = new HashSet<String>();
-		this.unFetched = new ConcurrentLinkedQueue<String>();
+		this.unFetched = new ArrayBlockingQueue<String>(maxFetchSize / 100);
 	}
 
 	public boolean isFetched(String link) {
@@ -58,6 +73,9 @@ public class LinkStorage {
 	}
 
 	public void offer(String url) {
+		if (unFetched.contains(url)) {
+			return;
+		}
 		unFetched.offer(url);
 	}
 

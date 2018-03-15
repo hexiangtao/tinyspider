@@ -81,7 +81,12 @@ public class Downloader implements Runnable {
 		Elements eles = doc.select("a[href]");
 		for (Element element : eles) {
 			String link = element.attr("abs:href").trim();
-			if (link == null || link.trim().length() == 0 || linksStorage.isFetched(link)) {
+
+			if (link == null || link.trim().length() == 0) {
+				continue;
+			}
+			link = link.contains("#") ? link.substring(0, link.indexOf("#")) : link;
+			if (linksStorage.isFetched(link)) {
 				Logger.debug("去重:{}", currentUrl);
 				continue;
 			}

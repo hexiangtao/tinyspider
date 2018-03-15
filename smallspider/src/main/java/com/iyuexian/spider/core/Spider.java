@@ -18,6 +18,8 @@ public class Spider {
 	 */
 	private List<Downloader> tasks;
 
+	private int threadNum = 1;
+
 	/**
 	 * 下载器线池
 	 */
@@ -51,7 +53,8 @@ public class Spider {
 	}
 
 	public Spider thread(int threadNum) {
-		return initThreads(threadNum);
+		this.threadNum = threadNum;
+		return this;
 	}
 
 	public Spider processor(PageProcessor pageProcessor) {
@@ -87,10 +90,7 @@ public class Spider {
 	}
 
 	private void checkInitParameters() {
-		if (this.tasks == null || this.tasks.size() == 0) {
-			initThreads(DEFAULT_THREAD_NUM);
-		}
-
+		initThreads(DEFAULT_THREAD_NUM);
 		if (cmdArgInfo != null) {
 			Logger.info("线程数:{}开始抓取:{}....", cmdArgInfo.getThreadNum(), cmdArgInfo.getHost());
 		}
