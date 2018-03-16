@@ -8,18 +8,18 @@ import com.iyuexian.spider.core.AbstractPageProcessor;
 import com.iyuexian.spider.core.Spider;
 import com.iyuexian.spider.util.Logger;
 
-@Selector("title")
-@Site(host = "www.baidu.com", filter = "baidu.com")
+@Selector(value = "img[src]", dir = "C:/baidu")
+@Site(host = "image.baidu.com", filter = "baidu.com")
 public class Demo1 extends AbstractPageProcessor {
 
 	public static void main(String[] args) {
-		Spider.create().thread(100).processor(new Demo1()).start();
+		Spider.create().thread(1).processor(new Demo1()).start();
 	}
 
 	@Override
 	public void process(Document doc) {
-		Logger.info("begin process:{}", doc.title());
-		// select(doc);
+		Logger.info("begin process:{}", doc.baseUri());
+		select(doc);
 
 	}
 

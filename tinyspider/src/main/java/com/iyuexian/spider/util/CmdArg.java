@@ -4,8 +4,8 @@ import com.iyuexian.spider.util.Logger;
 
 public class CmdArg {
 
-	public static CmdArg getCmdArgs(String host, int threadNum, String selector, String filterUrl) {
-		return new CmdArg(host, threadNum, selector, filterUrl);
+	public static CmdArg getCmdArgs(String host, int threadNum, String selector, String filterUrl,String dir) {
+		return new CmdArg(host, threadNum, selector, filterUrl,dir);
 
 	}
 
@@ -26,7 +26,7 @@ public class CmdArg {
 		}
 
 		int threadNum = setThreadNum(args, 1);
-		String selector = "", filterUrl = "";
+		String selector = "", filterUrl = "", dir = "";
 
 		if (args.length > 2) {
 			selector = args[2] != null && args[2].trim().length() > 0 ? args[2] : "";
@@ -36,7 +36,7 @@ public class CmdArg {
 		}
 
 		if (args.length > 3) {
-			selector = args[3] != null && args[3].trim().length() > 0 ? args[3] : "";
+			filterUrl = args[3] != null && args[3].trim().length() > 0 ? args[3] : "";
 		} else {
 			filterUrl = host;
 			Logger.warn("未设置匹配url,默认使用 {}", filterUrl);
@@ -44,7 +44,11 @@ public class CmdArg {
 
 		setLoggerLevel(args, 4);
 
-		return new CmdArg(host, threadNum, selector, filterUrl);
+		if (args.length > 5) {
+			dir = args[5] != null && args[5].trim().length() > 0 ? args[5] : "";
+		}
+
+		return new CmdArg(host, threadNum, selector, filterUrl, dir);
 
 	}
 
@@ -93,15 +97,17 @@ public class CmdArg {
 	private int threadNum;
 	private String selector;
 	private String filterUrl;
+	private String dir;
 
 	private CmdArg() {
 	}
 
-	private CmdArg(String host, int threadNum, String selector, String filterUrl) {
+	private CmdArg(String host, int threadNum, String selector, String filterUrl, String dir) {
 		this.host = host;
 		this.threadNum = threadNum;
 		this.selector = selector;
 		this.filterUrl = filterUrl;
+		this.dir = dir;
 	}
 
 	public String getHost() {
@@ -119,5 +125,10 @@ public class CmdArg {
 	public String getFilterUrl() {
 		return filterUrl;
 	}
+
+	public String getDir() {
+		return dir;
+	}
+	
 
 }
