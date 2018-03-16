@@ -20,7 +20,7 @@ public class LinkStorage {
 	private Set<String> fetched;
 	private Queue<String> unFetched;
 
-	private static final int maxFetchSize = 100000;
+	private static final int maxFetchSize = Integer.MAX_VALUE;
 
 	public boolean isEnableFetch() {
 		return LinkStorage.instance().getFetched().size() < maxFetchSize;
