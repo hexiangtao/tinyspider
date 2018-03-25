@@ -1,4 +1,4 @@
-# smallspider 
+# tinyspider 
 几十行代码实现 一个简单的爬虫程序 
 
 
@@ -15,19 +15,21 @@ Spider.java
 
 ##  启动方式 
 ### 1: 只包含一个参数启动
-```
-    java -jar  spider.jar  www.baidu.com
-```    
+
+ <   java -jar  tinyspider.jar  www.baidu.com    
+
 ### 2:包含多个参数启动
-````
-java -jar  spider.jar   www.baidu.com  1000  D:/urls.md
-````
+
+< java -jar tinyspider.jar www.dbmeinv.com  100  img[src]  www.dbmeinv.com 1 C:/test
+
 
 ### 启动参数说明
-1. wwww.baidu.com  要爬取的网站,如上：
-2. 1000            开启的线程数(可选，默认200)
-3. D:/url.text     内容存放路径(默认不存储) 
-
+ 1. 参数0(www.dbmeinv.com)            要爬取的网站 
+ 2. 参数1(100)                        开始的线程数
+ 3. 参数2(img)                        要提取的内容 
+ 4. 参数3(www.dbmeinv.com)            url包含的内容
+ 5. 参数4(1)                          日志打印级别
+ 6. 参数5(C:/test)                     提取的内容保存目录
 
 交流群:580889921
 
