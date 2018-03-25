@@ -16,11 +16,11 @@ Spider.java
 ##  启动方式 
 ### 1: 只包含一个参数启动
 
- <   java -jar  tinyspider.jar  www.baidu.com    
+ >   java -jar  tinyspider.jar  www.baidu.com    
 
 ### 2:包含多个参数启动
 
-< java -jar tinyspider.jar www.dbmeinv.com  100  img[src]  www.dbmeinv.com 1 C:/test
+> java -jar tinyspider.jar www.dbmeinv.com  100  img[src]  www.dbmeinv.com 1 C:/test
 
 
 ### 启动参数说明
