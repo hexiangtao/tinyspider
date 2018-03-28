@@ -148,16 +148,24 @@ public abstract class AbstractPageProcessor implements PageProcessor {
 
 	}
 
-	public void downloadMedia(String path, String dir) throws Exception {
-
+	private File checkDir(String path, String dir) {
 		if (StringUtil.isBlank(path) || path.startsWith("data:")) {
-			return;
+			return null;
 		}
 
 		File directory = new File(dir);
-
 		if (!directory.exists()) {
 			directory.mkdirs();
+		}
+		return directory;
+	}
+
+	public void downloadMedia(String path, String dir) throws Exception {
+
+		File directory = checkDir(path, dir);
+
+		if (directory == null) {
+			return;
 		}
 
 		Request req = new RequestBuilder().setUrl(path).build();
