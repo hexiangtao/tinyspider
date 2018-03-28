@@ -11,7 +11,6 @@ import org.jsoup.select.Elements;
 
 import com.iyuexian.spider.util.Logger;
 
-
 public class Downloader implements Runnable {
 
 	private static final int DEFAULT_WAIT_MAX_COUNT = 10;
@@ -58,7 +57,7 @@ public class Downloader implements Runnable {
 		this.currentWiatCount = 0;
 		linksStorage.putFetched(link);
 		Document doc = download(link);
-		invokeProcessor(link, doc);
+		processPage(link, doc);
 		return;
 
 	}
@@ -95,7 +94,7 @@ public class Downloader implements Runnable {
 		return links;
 	}
 
-	public void invokeProcessor(String url, Document doc) {
+	public void processPage(String url, Document doc) {
 		if (doc == null) {
 			return;
 		}

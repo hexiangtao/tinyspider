@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import com.iyuexian.spider.annotation.Site;
 import com.iyuexian.spider.util.CmdArg;
@@ -19,22 +18,29 @@ public class Spider {
 	 */
 	private List<Downloader> tasks;
 
+	/**
+	 * 线程数,即同时开启多少个线程抓取网页
+	 */
 	private int threadNum = DEFAULT_THREAD_NUM;
 
 	/**
-	 * 下载器线池
+	 * 线程池
 	 */
 	private ExecutorService threadPool;
 
+	/**
+	 * 该对象封装命令行参数
+	 */
 	private CmdArg cmdArgInfo;
 
 	/**
-	 * 要抓取的网站地址
+	 * 要抓取的网站主页
 	 */
 	private String host;
 
-	private List<Future<?>> results;
-
+	/**
+	 * 系统启动时间
+	 */
 	private long startTime;
 
 	/**
@@ -132,11 +138,9 @@ public class Spider {
 
 		checkInitParameters();
 		this.startTime = System.currentTimeMillis();
-		this.results = new ArrayList<Future<?>>(tasks.size());
 
 		for (Downloader task : tasks) {
-			Future<?> future = threadPool.submit(task);
-			results.add(future);
+			threadPool.submit(task);
 		}
 		getResultAndShutdown();
 
@@ -179,10 +183,6 @@ public class Spider {
 
 	public String getHost() {
 		return host;
-	}
-
-	public List<Future<?>> getResults() {
-		return results;
 	}
 
 	public long getStartTime() {
