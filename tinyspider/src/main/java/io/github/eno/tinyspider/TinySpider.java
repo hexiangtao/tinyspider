@@ -26,4 +26,8 @@ public class TinySpider {
 		scheduler.start();
 	}
 
+	public static void main(String[] args) {
+		TinySpider.create("http://www.baidu.com").start();
+
+	}
 }

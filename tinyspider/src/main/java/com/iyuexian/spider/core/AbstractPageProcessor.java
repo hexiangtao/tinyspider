@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,6 +29,8 @@ import com.ning.http.client.listener.TransferCompletionHandler;
 public abstract class AbstractPageProcessor implements PageProcessor {
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
+
+	static Pattern regEx = Pattern.compile("\\d{1,3}(x|_)\\d{1,3}\\s\\.(jpg|png|JPG|PNG)$");
 
 	private CmdArg cmdArg;
 
@@ -172,29 +175,57 @@ public abstract class AbstractPageProcessor implements PageProcessor {
 		client.executeRequest(req, new TransferCompletionHandler(true) {
 			@Override
 			public Response onCompleted(Response response) throws Exception {
-				File f = new File(directory, genFileName(path));
-				FileOutputStream fos = new FileOutputStream(f);
-				fos.write(response.getResponseBodyAsBytes());
-				fos.flush();
-				fos.close();
+
+				byte[] data = response.getResponseBodyAsBytes();
+				String fileName = genFileName(path);
+
+				if (enableDownload(data, fileName)) {
+					File f = new File(directory, fileName);
+					FileOutputStream fos = new FileOutputStream(f);
+					fos.write(response.getResponseBodyAsBytes());
+					fos.flush();
+					fos.close();
+				}
 				return super.onCompleted(response);
+
 			}
 
 		});
 
 	}
 
+	public static boolean enableDownload(byte[] data, String fileName) {
+
+		if (data.length <= 1024 * 50) {
+			return false;
+		}
+		if (fileName.endsWith(".png") || fileName.endsWith(".PNG")) {
+			return false;
+		}
+
+		if (regEx.matcher(fileName).matches()) {
+			return false;
+		}
+
+		return true;
+	}
+
 	public static String genFileName(String path) {
 		if (StringUtil.isBlank(path)) {
 			return null;
 		}
-		String fileName = String.valueOf(
-				LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) + "_" + System.currentTimeMillis());
-		int dotIndex = path.lastIndexOf('.');
-		if (dotIndex <= 0) {
-			return fileName;
-		}
-		return fileName + path.substring(dotIndex);
+
+		String sourceFileName = path.substring(path.lastIndexOf("/") + 1, path.length());
+		return sourceFileName;
+		// Logger.debug("----------sourceFileName:{}",sourceFileName);
+		// String fileName = String.valueOf(
+		// LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) + "_" +
+		// System.currentTimeMillis());
+		// int dotIndex = path.lastIndexOf('.');
+		// if (dotIndex <= 0) {
+		// return fileName;
+		// }
+		// return fileName + path.substring(dotIndex);
 
 	}
 

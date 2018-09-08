@@ -48,9 +48,5 @@ public class Scheduler {
 		downloadThreadPool.submit(downloader);
 	}
 
-	public static void main(String[] args) {
-		TinySpider.create("http://www.baidu.com").start();
-
-	}
 
 }

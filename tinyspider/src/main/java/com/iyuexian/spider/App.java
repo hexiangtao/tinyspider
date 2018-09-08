@@ -11,8 +11,8 @@ public class App extends AbstractPageProcessor {
 	public static void main(String[] args) {
 		CmdArg cmdArg = CmdArg.getCmdArgs(args);
 		Spider.create(cmdArg).processor(new App(cmdArg)).start();
-	}
 
+	}
 
 	public App(CmdArg cmdArg) {
 		super(cmdArg);
