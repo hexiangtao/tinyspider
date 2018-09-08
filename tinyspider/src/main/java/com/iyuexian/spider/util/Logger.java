@@ -17,7 +17,7 @@ public class Logger {
 
 	}
 
-	private static Level current = Level.INFO;
+	private static Level current = Level.DEBUG;
 
 	public static void setLevel(int le) {
 

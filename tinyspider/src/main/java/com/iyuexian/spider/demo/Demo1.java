@@ -9,11 +9,12 @@ import com.iyuexian.spider.core.Spider;
 import com.iyuexian.spider.util.Logger;
 
 @Selector(value = "img[src]", dir = "C:/baidu")
-@Site(host = "image.baidu.com", filter = "baidu.com")
+@Site(host = "http://www.doubannv.net/")
+
 public class Demo1 extends AbstractPageProcessor {
 
 	public static void main(String[] args) {
-		Spider.create().thread(1).processor(new Demo1()).start();
+		Spider.create().thread(100).processor(new Demo1()).start();
 	}
 
 	@Override
