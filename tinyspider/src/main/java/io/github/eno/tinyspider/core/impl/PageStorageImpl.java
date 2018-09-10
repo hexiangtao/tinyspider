@@ -2,20 +2,19 @@ package io.github.eno.tinyspider.core.impl;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 import com.iyuexian.spider.util.Logger;
 
 import io.github.eno.tinyspider.core.base.Page;
-import io.github.eno.tinyspider.core.base.PageCollector;
+import io.github.eno.tinyspider.core.base.PageStorage;
 
-public class PageCollectorImpl implements PageCollector<Page> {
+public class PageStorageImpl implements PageStorage<Page> {
 
 	private BlockingQueue<Page> queue;
 
 	private int capacity;
 
-	public PageCollectorImpl(int nPageCapacity) {
+	public PageStorageImpl(int nPageCapacity) {
 		this.capacity = nPageCapacity;
 		this.queue = new ArrayBlockingQueue<>(nPageCapacity);
 	}

@@ -3,12 +3,11 @@ package io.github.eno.tinyspider.core.impl;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import io.github.eno.tinyspider.TinySpider;
 import io.github.eno.tinyspider.core.base.Downloader;
 import io.github.eno.tinyspider.core.base.Page;
-import io.github.eno.tinyspider.core.base.PageCollector;
 import io.github.eno.tinyspider.core.base.PageProcessor;
-import io.github.eno.tinyspider.core.base.URLCollector;
+import io.github.eno.tinyspider.core.base.PageStorage;
+import io.github.eno.tinyspider.core.base.URLPipeline;
 
 public class Scheduler {
 
@@ -21,9 +20,9 @@ public class Scheduler {
 	private ExecutorService downloadThreadPool;
 	private ExecutorService processThreadPool;
 
-	private URLCollector urlCollector;
+	private URLPipeline urlCollector;
 
-	private PageCollector<Page> pageCollector;
+	private PageStorage<Page> pageCollector;
 
 	public Scheduler(String host) {
 		this(host, DEFAULT_THREAD_NUM);
@@ -37,8 +36,8 @@ public class Scheduler {
 		this.downloadThreadPool = Executors.newFixedThreadPool(nThreads);
 		this.processThreadPool = Executors.newFixedThreadPool(nThreads);
 
-		this.urlCollector = URLCollector.create(nURLCapacity, host);
-		this.pageCollector = PageCollector.create(nPageCapacity);
+		this.urlCollector = URLPipeline.create(nURLCapacity, host);
+		this.pageCollector = PageStorage.create(nPageCapacity);
 	}
 
 	public void start() {

@@ -3,14 +3,14 @@ package io.github.eno.tinyspider.core.impl;
 import com.iyuexian.spider.util.Logger;
 
 import io.github.eno.tinyspider.core.base.Page;
-import io.github.eno.tinyspider.core.base.PageCollector;
 import io.github.eno.tinyspider.core.base.PageProcessor;
+import io.github.eno.tinyspider.core.base.PageStorage;
 
 public class PageProcessorImpl implements PageProcessor {
 
-	private PageCollector<Page> pageCollector;
+	private PageStorage<Page> pageCollector;
 
-	public PageProcessorImpl(PageCollector<Page> pageCollector) {
+	public PageProcessorImpl(PageStorage<Page> pageCollector) {
 		this.pageCollector = pageCollector;
 	}
 

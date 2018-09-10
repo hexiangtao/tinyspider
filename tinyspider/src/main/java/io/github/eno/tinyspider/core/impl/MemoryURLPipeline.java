@@ -6,15 +6,15 @@ import java.util.concurrent.BlockingQueue;
 
 import com.iyuexian.spider.util.Logger;
 
-import io.github.eno.tinyspider.core.base.URLCollector;
+import io.github.eno.tinyspider.core.base.URLPipeline;
 
-public class MemoryURLCollector implements URLCollector {
+public class MemoryURLPipeline implements URLPipeline {
 
 	private BlockingQueue<String> queue;
 
 	private int capacity;
 
-	public MemoryURLCollector(int capacity, String host) {
+	public MemoryURLPipeline(int capacity, String host) {
 		this.capacity = capacity;
 		this.queue = new ArrayBlockingQueue<>(capacity);
 		this.put(host);

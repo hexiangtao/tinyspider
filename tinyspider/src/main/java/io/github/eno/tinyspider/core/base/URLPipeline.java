@@ -2,12 +2,12 @@ package io.github.eno.tinyspider.core.base;
 
 import java.util.List;
 
-import io.github.eno.tinyspider.core.impl.MemoryURLCollector;
+import io.github.eno.tinyspider.core.impl.MemoryURLPipeline;
 
-public interface URLCollector {
+public interface URLPipeline {
 
-	public static URLCollector create(int capacity, String host) {
-		return new MemoryURLCollector(capacity, host);
+	public static URLPipeline create(int capacity, String host) {
+		return new MemoryURLPipeline(capacity, host);
 
 	}
 

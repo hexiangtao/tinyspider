@@ -7,25 +7,25 @@ import com.iyuexian.spider.util.Logger;
 
 import io.github.eno.tinyspider.core.base.Downloader;
 import io.github.eno.tinyspider.core.base.Page;
-import io.github.eno.tinyspider.core.base.PageCollector;
-import io.github.eno.tinyspider.core.base.URLCollector;
+import io.github.eno.tinyspider.core.base.PageStorage;
+import io.github.eno.tinyspider.core.base.URLPipeline;
 
 public class DownloaderImpl implements Downloader {
 
-	private URLCollector urlCollector;
+	private URLPipeline urlCollector;
 
-	private PageCollector<Page> pageCollector;
+	private PageStorage<Page> pageStorage;
 
-	public DownloaderImpl(URLCollector urlCollector, PageCollector<Page> pageCollector) {
+	public DownloaderImpl(URLPipeline urlCollector, PageStorage<Page> pageStorage) {
 		this.urlCollector = urlCollector;
-		this.pageCollector = pageCollector;
+		this.pageStorage = pageStorage;
 	}
 
 	@Override
 	public void run() {
 		while (true) {
 
-			if (pageCollector.size() >= pageCollector.limit()) {
+			if (pageStorage.size() >= pageStorage.limit()) {
 				try {
 					continue;
 				} catch (Exception e) {
@@ -51,7 +51,7 @@ public class DownloaderImpl implements Downloader {
 			}
 			Page page = Page.of(doc);
 			urlCollector.put(page.links());
-			pageCollector.put(page);
+			pageStorage.put(page);
 			return page;
 		} catch (Exception ex) {
 			ex.printStackTrace();
