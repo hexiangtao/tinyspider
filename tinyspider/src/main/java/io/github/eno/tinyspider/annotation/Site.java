@@ -1,4 +1,4 @@
-package com.iyuexian.spider.annotation;
+package io.github.eno.tinyspider.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Selector {
-	public String[] value();
+public @interface Site {
+	public String host();
 
-	public String dir() default "";
+	public String[] filter() default {};
 }

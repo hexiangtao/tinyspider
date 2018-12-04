@@ -1,17 +1,17 @@
 package io.github.eno.tinyspider;
 
-import io.github.eno.tinyspider.core.impl.Scheduler;
+import io.github.eno.tinyspider.page.PageProcessor;
 
-public class TinySpider {
+public class App {
 
 	private Scheduler scheduler;
 
-	private TinySpider(String host) {
+	private App(String host) {
 		scheduler = new Scheduler(host);
 	}
 
-	public static TinySpider create(String siteUrl) {
-		return new TinySpider(siteUrl);
+	public static App create(String siteUrl) {
+		return new App(siteUrl);
 	}
 
 	public Scheduler getScheduler() {
@@ -22,12 +22,12 @@ public class TinySpider {
 		this.scheduler = scheduler;
 	}
 
-	public void start() {
-		scheduler.start();
+	public void start(PageProcessor processor) {
+		scheduler.start(processor);
 	}
 
 	public static void main(String[] args) {
-		TinySpider.create("http://www.baidu.com").start();
+		App.create("https://www.163.com/").start(PageProcessor.create());
 
 	}
 }

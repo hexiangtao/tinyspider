@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.iyuexian.tinyspider</groupId>
@@ -9,40 +10,48 @@
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
-    		<groupId>org.jsoup</groupId>
-    		<artifactId>jsoup</artifactId>
-    		<version>1.11.2</version>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.11.2</version>
 		</dependency>
-		
+
 		<dependency>
-    	<groupId>com.ning</groupId>
-    	<artifactId>async-http-client</artifactId>
-    	<version>1.9.40</version>
-	</dependency>
+			<groupId>com.ning</groupId>
+			<artifactId>async-http-client</artifactId>
+			<version>1.9.40</version>
+		</dependency>
+
+		<dependency>
+			<groupId>us.codecraft</groupId>
+			<artifactId>webmagic-core</artifactId>
+			<version>0.7.3</version>
+		</dependency>
+
 	</dependencies>
-	
+
 	<build>
 		<finalName>tinyspider</finalName>
 		<plugins>
-		  <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <executions>
-            <execution>
-                <phase>package</phase>
-                <goals>
-                        <goal>shade</goal>
-                </goals>
-                    <configuration>
-                        <transformers>
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>com.iyuexian.spider.App</mainClass>
-                            </transformer>
-                        </transformers>
-                    </configuration>
-            </execution>
-        </executions>
-     </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>com.iyuexian.spider.App</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

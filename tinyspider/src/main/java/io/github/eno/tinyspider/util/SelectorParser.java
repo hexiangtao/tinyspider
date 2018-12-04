@@ -1,4 +1,4 @@
-package com.iyuexian.spider.util;
+package io.github.eno.tinyspider.util;
 
 public class SelectorParser {
 

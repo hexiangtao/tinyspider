@@ -1,16 +1,14 @@
-package io.github.eno.tinyspider.core.base;
+package io.github.eno.tinyspider.page;
 
-import java.util.List;
+import java.util.Set;
 
 import org.jsoup.nodes.Document;
-
-import io.github.eno.tinyspider.core.impl.PageImpl;
 
 public interface Page {
 
 	public byte[] get();
 
-	public List<String> links();
+	public Set<String> links();
 
 	public String getUrl();
 

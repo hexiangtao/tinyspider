@@ -1,13 +1,11 @@
-package io.github.eno.tinyspider.core.impl;
+package io.github.eno.tinyspider.page;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import io.github.eno.tinyspider.core.base.Page;
 
 public class PageImpl implements Page {
 
@@ -33,9 +31,9 @@ public class PageImpl implements Page {
 	}
 
 	@Override
-	public List<String> links() {
+	public Set<String> links() {
 
-		List<String> links = new ArrayList<String>();
+		Set<String> links = new HashSet<String>();
 		Elements eles = doc.select("a[href]");
 		for (Element element : eles) {
 			links.add(extractLink(element));

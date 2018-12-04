@@ -1,9 +1,8 @@
-package com.iyuexian.spider.util;
-
-import com.iyuexian.spider.util.Logger;
+package io.github.eno.tinyspider.util;
 
 public class CmdArg {
 
+	 private static Logger logger=Logger.getLogger(CmdArg.class);
 	public static CmdArg getCmdArgs(String host, int threadNum, String selector, String filterUrl,String dir) {
 		return new CmdArg(host, threadNum, selector, filterUrl,dir);
 
@@ -20,7 +19,7 @@ public class CmdArg {
 
 		String host = "www.baidu.com";
 		if (args == null || args.length == 0) {
-			Logger.warn("未输入网站路径,默认使用 www.baidu.com");
+			logger.warn("未输入网站路径,默认使用 www.baidu.com");
 		} else {
 			host = args[0];
 		}
@@ -32,17 +31,17 @@ public class CmdArg {
 			selector = args[2] != null && args[2].trim().length() > 0 ? args[2] : "";
 		} else {
 			selector = "title";
-			Logger.warn("未设置提取标签,默认使用 {}", selector);
+			logger.warn("未设置提取标签,默认使用 {}", selector);
 		}
 
 		if (args.length > 3) {
 			filterUrl = args[3] != null && args[3].trim().length() > 0 ? args[3] : "";
 		} else {
 			filterUrl = host;
-			Logger.warn("未设置匹配url,默认使用 {}", filterUrl);
+			logger.warn("未设置匹配url,默认使用 {}", filterUrl);
 		}
 
-		setLoggerLevel(args, 4);
+		setloggerLevel(args, 4);
 
 		if (args.length > 5) {
 			dir = args[5] != null && args[5].trim().length() > 0 ? args[5] : "";
@@ -56,39 +55,39 @@ public class CmdArg {
 		final int defaultNum = 1;
 		final int maxNum = 3000;
 		if (args == null || args.length <= index) {
-			Logger.info("未设置线程数，使用默认值:{}", defaultNum);
+			logger.info("未设置线程数，使用默认值:{}", defaultNum);
 			return defaultNum;
 		}
 
 		String num = args[index];
 		if (num == null || num.trim().length() == 0) {
-			Logger.warn("未设置线程数，使用默认值:{}", defaultNum);
+			logger.warn("未设置线程数，使用默认值:{}", defaultNum);
 			return defaultNum;
 		}
 		try {
 			int lNum = Integer.parseInt(num);
 			if (lNum <= 0 || lNum > maxNum) {
-				Logger.warn("线程数设置区间只能在1-{}之间，使用默认值:{}", maxNum, defaultNum);
+				logger.warn("线程数设置区间只能在1-{}之间，使用默认值:{}", maxNum, defaultNum);
 				return defaultNum;
 			}
 			return lNum;
 
 		} catch (Exception ex) {
-			Logger.warn("线程数值不合法,{},使用默认,使用默认值:{}", num, defaultNum);
+			logger.warn("线程数值不合法,{},使用默认,使用默认值:{}", num, defaultNum);
 			return defaultNum;
 		}
 
 	}
 
-	private static void setLoggerLevel(String[] args, int index) {
+	private static void setloggerLevel(String[] args, int index) {
 		try {
 			if (args.length <= index) {
 				return;
 			}
 			int lNum = Integer.parseInt(args[index]);
-			Logger.setLevel(lNum);
+			logger.setLevel(lNum);
 		} catch (Exception ex) {
-			Logger.error("invalid level val of {}", args[index]);
+			logger.error("invalid level val of {}", args[index]);
 		}
 
 	}
