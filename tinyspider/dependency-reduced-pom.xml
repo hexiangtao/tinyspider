@@ -21,7 +21,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.iyuexian.spider.App</mainClass>
+                  <mainClass>io.github.eno.tinyspider.App</mainClass>
                 </transformer>
               </transformers>
             </configuration>
@@ -41,4 +41,3 @@
     </plugins>
   </build>
 </project>
-

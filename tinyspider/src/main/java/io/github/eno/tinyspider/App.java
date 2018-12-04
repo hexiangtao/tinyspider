@@ -1,6 +1,7 @@
 package io.github.eno.tinyspider;
 
 import io.github.eno.tinyspider.page.PageProcessor;
+import io.github.eno.tinyspider.util.CmdArg;
 
 public class App {
 
@@ -10,8 +11,9 @@ public class App {
 		scheduler = new Scheduler(host);
 	}
 
-	public static App create(String siteUrl) {
-		return new App(siteUrl);
+	public static App create(String[] args) {
+		CmdArg cmdArgs = CmdArg.getCmdArgs(args);
+		return new App(cmdArgs.getHost());
 	}
 
 	public Scheduler getScheduler() {
@@ -27,7 +29,7 @@ public class App {
 	}
 
 	public static void main(String[] args) {
-		App.create("https://www.163.com/").start(PageProcessor.create());
+		App.create(args).start(PageProcessor.create());
 
 	}
 }

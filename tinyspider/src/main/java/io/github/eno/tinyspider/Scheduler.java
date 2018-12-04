@@ -2,10 +2,8 @@ package io.github.eno.tinyspider;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import io.github.eno.tinyspider.downloader.Downloader;
-import io.github.eno.tinyspider.page.Page;
 import io.github.eno.tinyspider.page.PageProcessor;
 import io.github.eno.tinyspider.persistence.URLCollector;
 import io.github.eno.tinyspider.util.Logger;
@@ -14,7 +12,7 @@ public class Scheduler {
 
 	private Logger logger = Logger.getLogger(Scheduler.class);
 
-	static final int DEFAULT_THREAD_NUM = 1;
+	static final int DEFAULT_THREAD_NUM = 50;
 
 	static final int DEFAULT_URL_COLLECTOR_CAPACITY = 10;
 
@@ -45,23 +43,27 @@ public class Scheduler {
 	}
 
 	public void download() {
-		while (urlCollector.getUnFetched().size() > 0) {
+		while (true) {
 			try {
+				if (urlCollector.isQueueEmpty()) {
+					Thread.sleep(5000);
+				}
 				startTask();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		stop();
 
 	}
 
 	private void startTask() throws Exception {
 		String url = urlCollector.poll();
+		if (url == null || url.trim().length() == 0) {
+			return;
+		}
 		logger.debug("download {},remain:{}", url, urlCollector.getUnFetched().size());
 		Downloader downloader = Downloader.create(url, pageProcessor);
-		Future<Page> future = threadPool.submit(downloader);
-		future.get();
+		threadPool.submit(downloader);
 
 	}
 
