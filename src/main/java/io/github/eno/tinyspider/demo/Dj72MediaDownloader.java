@@ -1,7 +1,6 @@
 package io.github.eno.tinyspider.demo;
 
 import io.github.eno.tinyspider.downloader.DefaultMediaDownloader;
-import io.github.eno.tinyspider.page.Dj72ElementParser;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

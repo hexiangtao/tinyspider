@@ -1,5 +1,6 @@
-package io.github.eno.tinyspider.page;
+package io.github.eno.tinyspider.demo;
 
+import io.github.eno.tinyspider.page.ElementParser;
 import io.github.eno.tinyspider.util.StringUtil;
 import org.jsoup.nodes.Element;
 
