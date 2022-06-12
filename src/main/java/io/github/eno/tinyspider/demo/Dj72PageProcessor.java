@@ -13,8 +13,8 @@ import java.util.Set;
  * @author hexiangtao
  * @date 2022/6/11 16:05
  */
-@Selector(value = "script[body]", localDir = "C:/Users/edz/Desktop/music", download = true, downloader = Dj72MediaDownloader.class, parser = Dj72ElementParser.class)
-@Site(host = "http://www.72dj.com", hostContain = "72dj.com", threads = 10)
+@Selector(value = "script[body]", localDir = "C:/Users/edz/Desktop/music", download = true, parser = Dj72ElementParser.class)
+@Site(host = "http://www.72dj.com", hostContain = "72dj.com")
 public class Dj72PageProcessor extends AbstractPageProcessor {
     private final Logger logger = Logger.getLogger(this.getClass());
 

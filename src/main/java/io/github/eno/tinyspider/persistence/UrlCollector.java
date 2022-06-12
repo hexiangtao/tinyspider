@@ -2,6 +2,7 @@ package io.github.eno.tinyspider.persistence;
 
 import io.github.eno.tinyspider.util.Logger;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
@@ -42,8 +43,8 @@ public class UrlCollector {
     }
 
     private UrlCollector() {
-        this.history = new HashSet<String>();
-        this.unFetched = new ConcurrentLinkedQueue<String>();
+        this.history = Collections.synchronizedSet(new HashSet<>());
+        this.unFetched = new ConcurrentLinkedQueue<>();
     }
 
     public boolean isFetched(String link) {

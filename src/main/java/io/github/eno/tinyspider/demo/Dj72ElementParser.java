@@ -32,7 +32,7 @@ public class Dj72ElementParser implements ElementParser {
             return "";
         }
         String danceFilePath = line.substring(line.indexOf("\"") + 1, line.lastIndexOf("\""));
-        return danceFilePath + ".m4a";
+        return PREFIX + danceFilePath + ".m4a";
     }
 
 

@@ -52,7 +52,6 @@ public abstract class AbstractPageProcessor implements PageProcessor {
         if (!selector.download()) {
             return contents;
         }
-
         Class<? extends MediaDownloader> downloaderClazz = selector.downloader();
         for (String url : contents) {
             MediaDownloader downloader = downloaderClazz.getDeclaredConstructor(String.class, String.class).newInstance(url, selector.localDir());
@@ -61,7 +60,7 @@ public abstract class AbstractPageProcessor implements PageProcessor {
         return contents;
     }
 
-    private List<String> extractedElementsValue(Document doc, SelectorItem selectorItem) throws Exception {
+    private Set<String> extractedElementsValue(Document doc, SelectorItem selectorItem) throws Exception {
         List<String> contents = Lists.newArrayList();
         Elements elements = doc.select(selectorItem.getSelector());
         for (Element element : elements) {
@@ -70,7 +69,7 @@ public abstract class AbstractPageProcessor implements PageProcessor {
         }
         Set<String> collect = contents.stream().filter(o -> !StringUtil.isBlank(o)).collect(Collectors.toSet());
         logger.info("提取:{}", collect);
-        return contents;
+        return collect;
     }
 
     /**
