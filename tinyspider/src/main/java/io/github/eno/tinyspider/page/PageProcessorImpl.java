@@ -1,17 +1,18 @@
 package io.github.eno.tinyspider.page;
 
-import io.github.eno.tinyspider.util.Logger;
+import org.jsoup.nodes.Document;
 
-public class PageProcessorImpl implements PageProcessor {
+/**
+ * @author hexiangtao
+ * @date 2022/6/11 16:05
+ */
+public class PageProcessorImpl extends AbstractPageProcessor implements PageProcessor {
 
-	private Logger logger = Logger.getLogger(PageProcessorImpl.class);
+    public PageProcessorImpl() {
+    }
 
-	public PageProcessorImpl() {
-	}
-
-	@Override
-	public void process(Page page) {
-		logger.info("process:{}", page.title());
-	}
-
+    @Override
+    public void process(Document doc) throws Exception {
+        select(doc);
+    }
 }

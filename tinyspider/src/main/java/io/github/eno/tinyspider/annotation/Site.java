@@ -1,16 +1,37 @@
 package io.github.eno.tinyspider.annotation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+/**
+ * 定义要爬取的网站
+ *
+ * @author hexiangtao
+ * @date 2022-06-12
+ */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Site {
-	public String host();
 
-	public String[] filter() default {};
+
+    /**
+     * 网站地址
+     *
+     * @return
+     */
+    String host();
+
+    /**
+     * url过滤内容
+     *
+     * @return
+     */
+    String[] hostContain() default {};
+
+    /**
+     * 爬虫线程池线程数
+     *
+     * @return
+     */
+    int threads() default 1;
 }
