@@ -8,7 +8,6 @@ import io.github.eno.tinyspider.util.Logger;
 import io.github.eno.tinyspider.util.SelectorItem;
 import io.github.eno.tinyspider.util.SelectorParser;
 import io.github.eno.tinyspider.util.StringUtil;
-import org.assertj.core.util.Lists;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -61,7 +60,7 @@ public abstract class AbstractPageProcessor implements PageProcessor {
     }
 
     private Set<String> extractedElementsValue(Document doc, SelectorItem selectorItem) throws Exception {
-        List<String> contents = Lists.newArrayList();
+        List<String> contents = new ArrayList<>();
         Elements elements = doc.select(selectorItem.getSelector());
         for (Element element : elements) {
             String val = extractElementValue(element, selectorItem);

@@ -64,6 +64,10 @@ public class DefaultMediaDownloader extends TransferCompletionHandler implements
         }
         WAIT_DOWNLOAD.add(url);
         saveLinks(url);
+      //  submitDownloadTask(url);
+    }
+
+    private void submitDownloadTask(String url) {
         try {
             downloadThreadPool.submit(() -> executeRequest(url));
         } catch (Exception ex) {
