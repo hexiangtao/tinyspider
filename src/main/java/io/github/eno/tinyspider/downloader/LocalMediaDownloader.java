@@ -26,7 +26,7 @@ public class LocalMediaDownloader {
 
     private static final AtomicInteger THREAD_NUM = new AtomicInteger(0);
 
-    private static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(10, 10, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), r -> new Thread(r, "downloader-" + THREAD_NUM.incrementAndGet()));
+    private static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(30, 30, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), r -> new Thread(r, "downloader-" + THREAD_NUM.incrementAndGet()));
 
     private static final Logger logger = Logger.getLogger(DownloaderUtil.class);
 

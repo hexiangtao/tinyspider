@@ -1,5 +1,6 @@
 package io.github.eno.tinyspider.downloader;
 
+import cn.hutool.http.HttpRequest;
 import io.github.eno.tinyspider.page.Page;
 import io.github.eno.tinyspider.page.PageProcessor;
 import io.github.eno.tinyspider.persistence.UrlCollector;
@@ -16,6 +17,7 @@ import java.net.URL;
  */
 public class DefaultPageDownloader implements PageDownloader {
 
+
     private final PageProcessor processor;
 
     public DefaultPageDownloader(PageProcessor processor) {
@@ -27,7 +29,7 @@ public class DefaultPageDownloader implements PageDownloader {
         if (url == null || url.trim().length() == 0) {
             return null;
         }
-        Document doc = Jsoup.parse(new URL(url), 1000 * 10);
+        Document doc = Jsoup.connect(url).header("User-Agent", USER_AGENT).header("Cookie", COOKIE).get();
         if (doc == null) {
             return null;
         }

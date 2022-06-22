@@ -1,11 +1,9 @@
 package io.github.eno.tinyspider.page;
 
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.DocumentType;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import javax.print.Doc;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,7 +52,7 @@ public class PageImpl implements Page {
 
     private String extractLink(Element element) {
         String link = element.attr("abs:href").trim();
-        if (link == null || link.trim().length() == 0) {
+        if (link.trim().length() == 0) {
             return null;
         }
         link = link.contains("#") ? link.substring(0, link.indexOf("#")) : link;
