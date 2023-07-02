@@ -1,4 +1,4 @@
-package io.github.eno.tinyspider.demo;
+package io.github.eno.tinyspider.demo.processor;
 
 import io.github.eno.tinyspider.Scheduler;
 import io.github.eno.tinyspider.annotation.Selector;
@@ -13,13 +13,13 @@ import java.util.Set;
  * @author hexiangtao
  * @date 2022/6/11 16:05
  */
-@Selector(value = "script[body]", localDir = "D:/data/music/72dj", download = true, parser = Dj72ElementParser.class)
-@Site(host = "http://www.72dj.com", hostContain = "72dj.com")
-public class Dj72PageProcessor extends AbstractPageProcessor {
+@Selector(value = "audio[src]", localDir = "D:/data/music/www.djye.com", download = true)
+@Site(host = "http://www.djye.com", hostContain = "djye.com")
+public class DjyePageProcessor extends AbstractPageProcessor {
     private final Logger logger = Logger.getLogger(this.getClass());
 
     public static void main(String[] args) throws Exception {
-        new Scheduler(new Dj72PageProcessor()).start();
+        new Scheduler(new DjyePageProcessor()).start();
     }
 
     @Override

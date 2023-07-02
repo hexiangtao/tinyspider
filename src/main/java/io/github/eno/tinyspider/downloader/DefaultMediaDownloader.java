@@ -113,6 +113,11 @@ public class DefaultMediaDownloader extends TransferCompletionHandler implements
     private void saveLinks(String url) {
         try {
             synchronized (DefaultMediaDownloader.class) {
+
+                File dir=new File(localDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
                 Files.writeString(Path.of(localDir + "/links.txt"), url + "\r\n", StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
