@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 public class DownloaderUtil {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        String path = "C:/music/72dj.com/links.txt";
+        String path = "D:\\tagoo\\img\\links2.txt";
         LocalMediaDownloader localMediaDownloader = new LocalMediaDownloader();
         localMediaDownloader.download(path);
     }
